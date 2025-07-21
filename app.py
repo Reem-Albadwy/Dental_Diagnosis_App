@@ -26,29 +26,46 @@ st.markdown(f"""
 }}
 
 h1, h2, h4, p {{
-    color: #1c1c3b;
+    color: #1a1a1a;
     text-align: center;
     font-family: 'Segoe UI', sans-serif;
 }}
 
 .result-card {{
-    background: linear-gradient(135deg, #92c6f9 0%, #d6e6f2 100%);
+    background: linear-gradient(135deg, #6a95c4 0%, #c3d5ec 100%);
     padding: 30px;
     border-radius: 20px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
     text-align: center;
     margin-top: 30px;
-    color: #1c1c3b;
+    color: #0f1a2c;
 }}
 
+.result-card h2 {{
+    font-size: 26px;
+    margin-bottom: 10px;
+    color: #002b5c;
+}}
+
+.result-card p {{
+    font-size: 17px;
+    margin: 6px 0;
+    color: #111;
+}}
 
 .other-predictions {{
-    background-color: rgba(255, 255, 255, 0.85);
+    background: #f0f4f8;
     padding: 25px;
     border-radius: 15px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     margin-top: 30px;
-    color: #1c1c3b;
+    color: #111;
+}}
+
+.other-predictions p {{
+    font-size: 15px;
+    margin: 8px 0;
+    text-align: center;
 }}
 
 div.stButton > button {{
