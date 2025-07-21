@@ -164,9 +164,20 @@ if uploaded_file:
         </div>
         """, unsafe_allow_html=True)
 
-    with col2:
-        with st.expander("Other Probalities", expanded=True):
-            for label, prob in sorted_preds[1:]:
-                st.markdown(f"<p style='text-align:center;'><strong>{label}</strong>: {prob*100:.2f}%</p>", unsafe_allow_html=True)
-
-    st.markdown("<br>", unsafe_allow_html=True)
+   with col2:
+    with st.expander("Other Probabilities", expanded=True):
+        for label, prob in sorted_preds[1:]:
+            st.markdown(f"""
+                <div style="
+                    background-color: rgba(255, 255, 255, 0.8);
+                    padding: 10px;
+                    margin: 8px 0;
+                    border-radius: 12px;
+                    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+                    text-align: center;
+                    font-weight: bold;
+                    color: #333;
+                ">
+                    {label}: {prob*100:.2f}%
+                </div>
+            """, unsafe_allow_html=True)
