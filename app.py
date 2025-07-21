@@ -179,3 +179,31 @@ if uploaded_file:
                     {label}: {prob*100:.2f}%
                 </div>
             """, unsafe_allow_html=True)
+            from fpdf import FPDF
+            import base64
+            def generate_report(main_label, sorted_preds):
+               pdf = FPDF()
+               pdf.add_page()
+               pdf.set_font("Arial", 'B', 16)
+               pdf.cell(0, 10, "Dental Classification Report", ln=True, align='C')
+               pdf.ln(10)
+               pdf.set_font("Arial", 'B', 12)
+               pdf.cell(0, 10, f"Primary Diagnosis: {main_label}", ln=True)
+               pdf.ln(5)
+               pdf.set_font("Arial", '', 11)
+               pdf.cell(0, 10, "Other Probabilities:", ln=True)
+               for label, prob in sorted_preds[1:]:
+               pdf.cell(0, 10, f"- {label}: {prob*100:.2f}%", ln=True)
+               pdf.ln(10)
+               pdf.set_font("Arial", 'I', 11)
+               pdf.multi_cell(0, 10,
+        "This report provides an overview of the AI-based dental image classification.\n"
+        "It is highly recommended to consult a certified dentist for clinical confirmation."
+    )
+        pdf_output = pdf.output(dest='S').encode('latin1')
+        b64_pdf = base64.b64encode(pdf_output).decode('utf-8')
+    return b64_pdf
+b64 = generate_report(main_label, sorted_preds)
+href = f'<a href="data:application/pdf;base64,{b64}" download="dental_report.pdf">📄 Download Diagnosis Report (PDF)</a>'
+st.markdown(href, unsafe_allow_html=True)
+
