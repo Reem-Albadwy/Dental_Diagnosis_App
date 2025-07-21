@@ -5,7 +5,7 @@ This project is a deep learning application for classifying 7 different teeth-re
 ---
 
 🚀 **Live Demo**  
-👉 [Try the Streamlit App Here](https://testing-fkx7udhhmzxsx5ilsgkucr.streamlit.app/)
+👉 [Try the Streamlit App Here](https://dentaldiagnosisapp-caodgnw4mmk47momoy9n9w.streamlit.app/)
 
 ---
 
