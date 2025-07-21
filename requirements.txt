@@ -1,0 +1,11 @@
+streamlit==1.27.2
+tensorflow==2.15.0
+numpy
+pillow
+reportlab
+gdown
+streamlit-extras
+streamlit-elements
+
+
+
