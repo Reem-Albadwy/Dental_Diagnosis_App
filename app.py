@@ -13,7 +13,8 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-background_image_url = "https://raw.githubusercontent.com/Reem-Albadwy/Dental_Diagnosis_App/main/background2.png"
+background_image_url = "https://raw.githubusercontent.com/Reem-Albadwy/Dental_Diagnosis_App/main/background2.jpg"
+
 
 st.markdown(f"""
 <style>
