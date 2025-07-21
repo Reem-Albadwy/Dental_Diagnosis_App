@@ -165,7 +165,7 @@ if uploaded_file:
         """, unsafe_allow_html=True)
 
    with col2:
-    with st.expander("Other Probabilities", expanded=True):
+      with st.expander("Other Probabilities", expanded=True):
         for label, prob in sorted_preds[1:]:
             st.markdown(f"""
                 <div style="
