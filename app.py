@@ -162,10 +162,9 @@ if uploaded_file:
             <p style="font-size:16px;"><strong>Advice:</strong> {advice_dict.get(main_label, "Keep good oral hygiene and visit your dentist regularly.")}</p>
         </div>
         """, unsafe_allow_html=True)
-
-     with col2:
-      with st.expander("Other Probabilities", expanded=True):
-        for label, prob in sorted_preds[1:]:
+        with col2:
+           with st.expander("Other Probabilities", expanded=True):
+              for label, prob in sorted_preds[1:]:
             st.markdown(f"""
                 <div style="
                     background-color: rgba(255, 255, 255, 0.8);
