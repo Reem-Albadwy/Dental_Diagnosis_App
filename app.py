@@ -6,7 +6,6 @@ import os
 import gdown
 import zipfile
 
-# إعداد صفحة التطبيق
 st.set_page_config(
     page_title="AI Dental Diagnosis",
     page_icon="🦷",
@@ -14,10 +13,9 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# رابط الخلفية
 background_image_url = "https://raw.githubusercontent.com/Reem-Albadwy/Dental_Diagnosis_App/main/background.jpg"
 
-# تنسيقات CSS
+
 st.markdown(f"""
 <style>
 [data-testid="stAppViewContainer"] > .main {{
@@ -28,13 +26,13 @@ st.markdown(f"""
 }}
 
 h1, h2, h4, p {{
-    color: #f5f5f5;
+    color: #1c1c3b;
     text-align: center;
     font-family: 'Segoe UI', sans-serif;
 }}
 
 .result-card {{
-    background: rgba(255, 255, 255, 0.85);
+    background: linear-gradient(135deg, #92c6f9 0%, #d6e6f2 100%);
     padding: 30px;
     border-radius: 20px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
@@ -42,6 +40,7 @@ h1, h2, h4, p {{
     margin-top: 30px;
     color: #1c1c3b;
 }}
+
 
 .other-predictions {{
     background-color: rgba(255, 255, 255, 0.85);
@@ -53,7 +52,7 @@ h1, h2, h4, p {{
 }}
 
 div.stButton > button {{
-    background-color: #003049;
+    background-color: #1c1c3b;
     color: white;
     border-radius: 10px;
     font-weight: bold;
@@ -64,12 +63,12 @@ div.stButton > button {{
 }}
 
 div.stButton > button:hover {{
-    background-color: #001f2d;
+    background-color: #003366;
     transform: scale(1.03);
 }}
 
 section[data-testid="stFileUploader"] {{
-    border: 2px dashed #f5f5f5;
+    border: 2px dashed #1c1c3b;
     border-radius: 12px;
     background-color: rgba(255, 255, 255, 0.75);
     padding: 1.5em;
@@ -83,11 +82,14 @@ section[data-testid="stFileUploader"] label {{
 </style>
 """, unsafe_allow_html=True)
 
-# عنوان التطبيق
+
 st.markdown("<h1>🦷 AI Dental Diagnosis</h1>", unsafe_allow_html=True)
 st.markdown("<h4>Upload a dental image to receive an instant prediction</h4>", unsafe_allow_html=True)
 
-# تحميل الموديل
+model_url = "https://drive.google.com/uc?export=download&id=1Ddqk-r3RJjh2-hBKqtQjNyJmIb0JP7vY"
+model_zip_path = "Xception_FineTuned_Model.zip"
+model_folder = "Xception_FineTuned_Model"
+
 @st.cache_resource
 def load_model():
     model_dir = "Xception_FineTuned_Model"
@@ -118,16 +120,14 @@ advice_dict = {
     'OT': "Oral trauma should be managed by avoiding further irritation and visiting a dentist."
 }
 
-# رفع الصورة
 uploaded_file = st.file_uploader("", type=["jpg", "jpeg", "png"])
 
 if uploaded_file:
     image = Image.open(uploaded_file)
-    st.image(image, caption="🖼️ Uploaded Image", use_column_width=True)
-
-    # معالجة الصورة
+    st.image(image, caption="🖼 Uploaded Image", use_column_width=True)
+    
     infer = model.signatures["serving_default"]
-    img = image.convert("RGB").resize((128, 128))
+    img = image.convert("RGB").resize((128, 128))  
     img_array = np.array(img).astype(np.float32) / 255.0
     img_tensor = tf.convert_to_tensor(np.expand_dims(img_array, axis=0), dtype=tf.float32)
 
@@ -136,7 +136,6 @@ if uploaded_file:
     sorted_preds = sorted(zip(class_names, preds), key=lambda x: x[1], reverse=True)
     main_label, main_prob = sorted_preds[0]
 
-    # عرض النتيجة
     col1, col2 = st.columns([2, 1], gap="large")
 
     with col1:
@@ -149,6 +148,8 @@ if uploaded_file:
         """, unsafe_allow_html=True)
 
     with col2:
-        with st.expander("Other Probabilities", expanded=True):
+        with st.expander("Other Probalities", expanded=True):
             for label, prob in sorted_preds[1:]:
                 st.markdown(f"<p style='text-align:center;'><strong>{label}</strong>: {prob*100:.2f}%</p>", unsafe_allow_html=True)
+
+    st.markdown("<br>", unsafe_allow_html=True)
