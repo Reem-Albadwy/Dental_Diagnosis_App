@@ -6,7 +6,7 @@ import os
 import gdown
 import zipfile
 
-# Page config
+# إعداد صفحة التطبيق
 st.set_page_config(
     page_title="AI Dental Diagnosis",
     page_icon="🦷",
@@ -14,10 +14,10 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# Background image
+# رابط الخلفية
 background_image_url = "https://raw.githubusercontent.com/Reem-Albadwy/Dental_Diagnosis_App/main/background.jpg"
 
-# Styling
+# تنسيقات CSS
 st.markdown(f"""
 <style>
 [data-testid="stAppViewContainer"] > .main {{
@@ -83,11 +83,11 @@ section[data-testid="stFileUploader"] label {{
 </style>
 """, unsafe_allow_html=True)
 
-# App Title
+# عنوان التطبيق
 st.markdown("<h1>🦷 AI Dental Diagnosis</h1>", unsafe_allow_html=True)
 st.markdown("<h4>Upload a dental image to receive an instant prediction</h4>", unsafe_allow_html=True)
 
-# Model download and loading
+# تحميل الموديل
 @st.cache_resource
 def load_model():
     model_dir = "Xception_FineTuned_Model"
@@ -105,7 +105,6 @@ def load_model():
     else:
         return tf.keras.models.load_model(model_dir)
 
-# Load model and labels
 model = load_model()
 class_names = ['CaS', 'CoS', 'Gum', 'MC', 'OC', 'OLP', 'OT']
 
@@ -119,14 +118,14 @@ advice_dict = {
     'OT': "Oral trauma should be managed by avoiding further irritation and visiting a dentist."
 }
 
-# File uploader
+# رفع الصورة
 uploaded_file = st.file_uploader("", type=["jpg", "jpeg", "png"])
 
-# Prediction logic
 if uploaded_file:
     image = Image.open(uploaded_file)
     st.image(image, caption="🖼️ Uploaded Image", use_column_width=True)
-    
+
+    # معالجة الصورة
     infer = model.signatures["serving_default"]
     img = image.convert("RGB").resize((128, 128))
     img_array = np.array(img).astype(np.float32) / 255.0
@@ -137,6 +136,7 @@ if uploaded_file:
     sorted_preds = sorted(zip(class_names, preds), key=lambda x: x[1], reverse=True)
     main_label, main_prob = sorted_preds[0]
 
+    # عرض النتيجة
     col1, col2 = st.columns([2, 1], gap="large")
 
     with col1:
