@@ -154,7 +154,6 @@ if uploaded_file:
     main_label, main_prob = sorted_preds[0]
 
     col1, col2 = st.columns([2, 1], gap="large")
-
     with col1:
         st.markdown(f"""
         <div class="result-card">
@@ -164,7 +163,7 @@ if uploaded_file:
         </div>
         """, unsafe_allow_html=True)
 
-   with col2:
+     with col2:
       with st.expander("Other Probabilities", expanded=True):
         for label, prob in sorted_preds[1:]:
             st.markdown(f"""
