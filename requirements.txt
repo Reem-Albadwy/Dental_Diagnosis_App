@@ -6,6 +6,8 @@ reportlab
 gdown
 streamlit-extras
 streamlit-elements
+fpdf
+
 
 
 
