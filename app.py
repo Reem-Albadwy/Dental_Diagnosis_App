@@ -103,8 +103,9 @@ section[data-testid="stFileUploader"] label {{
 """, unsafe_allow_html=True)
 
 
-st.markdown("<h1>🦷 AI Dental Diagnosis</h1>", unsafe_allow_html=True)
-st.markdown("<h4>Upload a dental image to receive an instant prediction</h4>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; font-size: 60px; font-weight: bold;'>🦷 AI Dental Diagnosis</h1>", unsafe_allow_html=True)
+st.markdown("<h4 style='text-align: center; color: #003049;'>Upload a dental image to receive an instant prediction</h4>", unsafe_allow_html=True)
+
 
 model_url = "https://drive.google.com/uc?export=download&id=1Ddqk-r3RJjh2-hBKqtQjNyJmIb0JP7vY"
 model_zip_path = "Xception_FineTuned_Model.zip"
