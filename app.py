@@ -180,23 +180,7 @@ if uploaded_file:
     sorted_preds = sorted(zip(class_names, preds), key=lambda x: x[1], reverse=True)
     main_label, main_prob = sorted_preds[0]
     b64 = generate_report(main_label, sorted_preds)
-    href = f'''
-    <a href="data:application/pdf;base64,{b64}" download="dental_report.pdf" 
-      style="
-       display: inline-block;
-       background-color: #000;
-       color: #fff;
-       padding: 12px 20px;
-       font-size: 16px;
-       border-radius: 8px;
-       text-decoration: none;
-       font-weight: bold;
-       margin-top: 20px;
-       box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-     ">
-      📄 Download Diagnosis Report (PDF)
-    </a>
-    '''
+    href = f'<a href="data:application/pdf;base64,{b64}" download="dental_report.pdf">📄 Download Diagnosis Report (PDF)</a>'
     st.markdown(href, unsafe_allow_html=True)
 
     col1, col2 = st.columns([2, 1], gap="large")
